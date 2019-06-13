@@ -22,15 +22,16 @@ class Student extends Person {
         this.favSubjects = attributes.favSubjects;
     }
     listsSubjects() {
-        return `Today we are learning about ${subject}`;
+        var outSubjects = this.favSubjects.toString();
+        return outSubjects;
     }
 
-    PRAssignment() {
-        return `${student.name} has submitted a PR for ${subject}`;
+    PRAssignment(subject) {
+        return `${this.name} has submitted a PR for ${subject}`;
     }
 
-    sprintChallenge() {
-        return `${student.name} has begun sprint challenge on ${this.attributes.subject}`;
+    sprintChallenge(subject) {
+        return `${this.name} has begun sprint challenge on ${subject}`;
     }
 
 }
@@ -42,10 +43,13 @@ const duraan = new Student({
     location: 'Minnesota',
     previousBackground: 'Business Owner',
     className: 'Web 21',
-    favSubjects: 'Web Dev',
+    favSubjects: ['Javascript', 'Python'],
 })
 
 console.log(duraan);
+console.log(duraan.listsSubjects());
+console.log(duraan.PRAssignment('javascript'));
+console.log(duraan.sprintChallenge('javascript'));
 
 //---------------------INSTRUCTOR EXTENDS---------------------------------
 
@@ -67,8 +71,8 @@ class Instructor extends Person {
 }
 
 
-const fred = new Instructor({
-    name: 'Fred',
+const dan = new Instructor({
+    name: 'Dan',
     location: 'Bedrock',
     age: 37,
     favLanguage: 'JavaScript',
@@ -76,8 +80,9 @@ const fred = new Instructor({
     catchPhrase: `Don't forget the homies`
 })
 
-console.log(fred);
-console.log(fred.grade(duraan, 'javascript'));
+console.log(dan);
+console.log(dan.demo('javascript'));
+console.log(dan.grade(duraan, 'javascript'));
 
 //---------------------PM EXTENDS---------------------------------
 
@@ -91,8 +96,8 @@ class ProjectManagers extends Instructor {
         return `${this.name} announces to ${channel}`;
     }
 
-    debugsCode(name, subject) {
-        return `${name} debugs ${student.name}'s code on ${subject}`;
+    debugsCode(student, subject) {
+        return `${this.name} debugs ${student.name}'s code on ${subject}`;
     }
 
 }
@@ -112,8 +117,8 @@ const josh = new ProjectManagers({
 
 
 console.log(josh);
-console.log(josh.standUp('web21'));
-console.log(josh.debugsCode('Web Dev'));
+console.log(josh.standUp('web21_smoot'));
+console.log(josh.debugsCode(duraan, 'Javascript'));
     
 //--------------------STUDENT EXTENDS--------------------------------
 

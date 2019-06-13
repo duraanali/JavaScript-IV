@@ -27,16 +27,26 @@ Prototype Refactor
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
-function GameObject(attributes) {
+class Game {
+    constructor(attributes) {
+        this.name = attributes.name;
+    }
+
+}
+
+
+class GameObject extends Game {
+    constructor(attributes) {
+    super(attributes);
     this.createdAt = attributes.createdAt;
     this.name = attributes.name;
     this.dimensions = attributes.dimensions;
 }
 
-GameObject.prototype.destroy = function () {
+destroy() {
     return `${this.name} was removed from the game.`;
+    }
 }
-
 /*
   === CharacterStats ===
   * healthPoints
@@ -44,14 +54,20 @@ GameObject.prototype.destroy = function () {
   * should inherit destroy() from GameObject's prototype
 */
 
-function CharacterStats(attributes) {
+class CharacterStats extends GameObject {
+    constructor(attributes) {
+    super(attributes);
     this.healthPoints = attributes.healthPoints;
-    GameObject.call(this, attributes)
 }
 
-CharacterStats.prototype = Object.create(GameObject.prototype)
-CharacterStats.prototype.takeDamage = function () {
+// CharacterStats.prototype = Object.create(GameObject.prototype)
+// CharacterStats.prototype.takeDamage = function () {
+//     return ` ${this.name} took damage.`;
+//     }
+
+    takeDamage() {
     return ` ${this.name} took damage.`;
+    }
 }
 
 
@@ -65,17 +81,22 @@ CharacterStats.prototype.takeDamage = function () {
   * should inherit takeDamage() from CharacterStats
 */
 
-function Humanoid(attributes) {
-    CharacterStats.call(this, attributes);
+class Humanoid extends CharacterStats {
+    constructor(attributes) {
+    super(attributes);
     this.team = attributes.team;
     this.weapons = attributes.weapons;
     this.language = attributes.language;
-
 }
 
-Humanoid.prototype = Object.create(CharacterStats.prototype)
-Humanoid.prototype.greet = function () {
-    return `${this.name} offers a greeting in ${this.language}.`;
+// Humanoid.prototype = Object.create(CharacterStats.prototype)
+// Humanoid.prototype.greet = function () {
+//     return `${this.name} offers a greeting in ${this.language}.`;
+// }
+
+    greet() {
+        return `${this.name} offers a greeting in ${this.language}.`;
+    }
 }
 
 /*
