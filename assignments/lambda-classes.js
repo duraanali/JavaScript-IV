@@ -8,40 +8,11 @@ class Person {
     }
 
     speak() {
-        console.log(`Hello my name is ${this.name}, I am from ${this.location}.`);
+        return `Hello my name is ${this.name}, I am from ${this.location}.`;
     }
 }
 
-//---------------------INSTRUCTOR EXTENDS---------------------------------
-
-class Instructor extends Person {
-    constructor(attributes) {
-        super(attributes);
-        this.specialty = attributes.specialty;
-        this.favLanguage = attributes.favLanguage;
-        this.catchPhrase = attributes.catchPhrase;
-    }
-    demo(subject) {
-        console.log(`Today we are learning about ${subject}`);
-    }
-
-    grade(student, subject) {
-        console.log(`${student.name} receives a perfect score on ${subject}`);
-    }
-
-}
-
-
-const fred = new Instructor({
-    name: 'Fred',
-    location: 'Bedrock',
-    age: 37,
-    favLanguage: 'JavaScript',
-    specialty: 'Front-end',
-    catchPhrase: `Don't forget the homies`
-})
-
-//--------------------STUDENT EXTENDS--------------------------------
+//---------------------------STUDENT EXTEND --------------------------
 
 class Student extends Person {
     constructor(attributes) {
@@ -51,15 +22,15 @@ class Student extends Person {
         this.favSubjects = attributes.favSubjects;
     }
     listsSubjects() {
-        console.log(`Today we are learning about ${subject}`);
+        return `Today we are learning about ${subject}`;
     }
 
-    PRAssignment () {
-        console.log(`${student.name} has submitted a PR for ${subject}`);
+    PRAssignment() {
+        return `${student.name} has submitted a PR for ${subject}`;
     }
 
-    sprintChallenge () {
-        console.log(`${student.name} has begun sprint challenge on ${this.attributes.subject}`);
+    sprintChallenge() {
+        return `${student.name} has begun sprint challenge on ${this.attributes.subject}`;
     }
 
 }
@@ -74,9 +45,79 @@ const duraan = new Student({
     favSubjects: 'Web Dev',
 })
 
-//----------------------------------------------------------
+console.log(duraan);
+
+//---------------------INSTRUCTOR EXTENDS---------------------------------
+
+class Instructor extends Person {
+    constructor(attributes) {
+        super(attributes);
+        this.specialty = attributes.specialty;
+        this.favLanguage = attributes.favLanguage;
+        this.catchPhrase = attributes.catchPhrase;
+    }
+    demo(subject) {
+        return `Today we are learning about ${subject}`;
+    }
+
+    grade(student, subject) {
+        return `${student.name} receives a perfect score on ${subject}`;
+    }
+
+}
+
+
+const fred = new Instructor({
+    name: 'Fred',
+    location: 'Bedrock',
+    age: 37,
+    favLanguage: 'JavaScript',
+    specialty: 'Front-end',
+    catchPhrase: `Don't forget the homies`
+})
 
 console.log(fred);
-fred.demo('web21');
-console.log(duraan);
-duraan.speak();
+console.log(fred.grade(duraan, 'javascript'));
+
+//---------------------PM EXTENDS---------------------------------
+
+class ProjectManagers extends Instructor {
+    constructor(attributes) {
+        super(attributes);
+        this.gradClassName = attributes.gradClassName;
+        this.favInstructor = attributes.favInstructor;
+    }
+    standUp(channel) {
+        return `${this.name} announces to ${channel}`;
+    }
+
+    debugsCode(name, subject) {
+        return `${name} debugs ${student.name}'s code on ${subject}`;
+    }
+
+}
+
+
+const josh = new ProjectManagers({
+    name: 'josh',
+    location: 'Kansas',
+    age: 37,
+    gradClassName: 'Web21',
+    favInstructor: 'Dan',
+    catchPhrase: `Cool Bro`,
+    specialty: 'Backend',
+    favLanguage: 'Python',
+
+})
+
+
+console.log(josh);
+console.log(josh.standUp('web21'));
+console.log(josh.debugsCode('Web Dev'));
+    
+//--------------------STUDENT EXTENDS--------------------------------
+
+
+
+
+
